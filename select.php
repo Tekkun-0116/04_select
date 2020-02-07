@@ -6,7 +6,6 @@ define('PASSWORD', '9999');
 
 try {
   $dbh = new PDO(DSN, USER, PASSWORD);
-  echo '接続に成功しました！' . '<br>';
 } catch (PDOException $e) {
   echo $e->getMessage();
   exit;
@@ -19,7 +18,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
     $sql = "select * from animals";
     $stmt = $dbh->prepare($sql);
 } else {
-    $sql2 = "select * from animals where description like :keyword ";
+    $sql2 = "select * from animals where discription like :keyword ";
     $stmt = $dbh->prepare($sql2);
     $keyword = '%'.$keyword.'%';
     $stmt->bindParam(":keyword", $keyword);
@@ -51,7 +50,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
     <?php
     foreach ($animals as $animal)
     {
-      echo $animal['type'] .  'の' . $animal['classifcation'] . 'ちゃん' .' <br> ' . $animal['description'] . ' <br> ' . $animal['birthday'] . '生まれ' . ' <br> ' . '出身地' . $animal['birthplace'] . ' <hr> ';
+      echo $animal['type'] .  'の' . $animal['classifcation'] . 'ちゃん' .' <br> ' . $animal['discription'] . ' <br> ' . $animal['birthday'] . '生まれ' . ' <br> ' . '出身地' . $animal['birthplace'] . ' <hr> ';
     }
     ?>
   </p>
